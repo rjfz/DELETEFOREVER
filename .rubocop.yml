@@ -1,0 +1,8 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'db/migrate/*'
+    - 'bin/*'
+
+Style/Documentation:
+  Enabled: false

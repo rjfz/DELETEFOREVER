@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="card">
+    <img class="card-img-top" src="" alt="" style="width:100%">
+    <div class="card-header">
+      <h5 class="card-title"><%= @article.title %></h5>
+      <p class="card-text">by <%= @article.author.username %></p>
+    </div>
+    <div class="card-body">
+      <p class="pre">
+        <%= @article.text %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<h2>Comments</h2>
+<%= render @article.comments %>
+  <% if logged_in?%>
+<h2>Add a comment:</h2>
+<%= render 'comments/form' %>
+ <% end %>
+<% if can? :update, @article %>
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<% end %>
+<%= link_to 'Back', articles_path %>

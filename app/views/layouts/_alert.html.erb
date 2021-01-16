@@ -1,0 +1,8 @@
+<% if flash[type] %>
+  <div class="alert alert-<%= style %> alert-dismissible fade show" role="alert">
+    <div class="<%= type %>"><%= flash[type] %></div>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>
