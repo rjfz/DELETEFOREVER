@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Blog</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title><%= @page_title %></title>
+  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
+</head>
   <body>
     <%= render 'layouts/navbar' %>
     <div class='container-fluid'>
@@ -19,6 +17,6 @@
     <%= render 'layouts/alert', type: :error, style: :danger %>
 
     <%= yield %>
-    </div>
+
   </body>
 </html>
