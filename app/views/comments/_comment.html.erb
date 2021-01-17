@@ -1,17 +1,26 @@
-
-<p>
-  <strong>Commenter:</strong>
-  <%= comment.commenter.username %>
-</p>
-<p>
-  <strong>Comment:</strong>
-  <%= comment.body %>
-</p>
-
- <% if can? :delete, comment %>
-<p>
-  <%= link_to 'Destroy Comment', [comment.article, comment],
+<div class="card mb-3">
+  <div class="card-header">
+  </div>
+  <div class="card-body p-0">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2 border-right border-dark p-3 text-center">
+          <h5 class="card-title"><%= comment.commenter.username %></h5>
+          <img class="img-fluid" src="<%= url_for current_user.medium %>">
+          <p class="d-block">  Posts: <%= comment.commenter.comments.count %>
+          </p>
+          <% if can? :delete, comment %>
+            <p>
+              <%= link_to 'Destroy Comment', [comment.article, comment],
                method: :delete,
                data: { confirm: 'Are you sure?' } %>
-</p>
-<% end %>
+            </p>
+          <% end %>
+        </div>
+        <div class="col-10 p-3">
+          <h5 class="card-title"><%= comment.body %></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

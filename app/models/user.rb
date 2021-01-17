@@ -2,8 +2,8 @@
 
 class User < ApplicationRecord
   has_secure_password
-  has_many :comments, as: :commenter
-  has_many :articles, as: :author
+  has_many :comments, foreign_key: :commenter
+  has_many :articles, foreign_key: :author
   has_many :user_roles
   has_many :roles, through: :user_roles
   has_one_attached :avatar
