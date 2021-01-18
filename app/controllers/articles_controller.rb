@@ -3,7 +3,6 @@
 class ArticlesController < ApplicationController
   before_action :require_login, except: %i[index show]
 
-
   def index
     @articles = Article.all
   end
@@ -55,9 +54,9 @@ class ArticlesController < ApplicationController
   end
 
   def author_permission
-    unless can? :update, @article
-      flash[:warning] = 'You are not the author of this article'
-      redirect_to '/articles'
-    end
+    return if can? :update, @article
+
+    flash[:warning] = 'You are not the author of this article'
+    redirect_to '/articles'
   end
 end

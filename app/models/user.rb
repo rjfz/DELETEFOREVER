@@ -9,6 +9,9 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   validates :username, presence: true, uniqueness: true, length: { minimum: 3 }
+  validates :password, presence: true, length: { minimum: 5 }, if: :password
+
+  validate :avatar_attached?
 
   after_create :assign_default_role
 
@@ -26,5 +29,11 @@ class User < ApplicationRecord
 
   def assign_default_role
     roles << Role.find_by(role: 'member')
+  end
+
+  private
+
+  def avatar_attached?
+    errors.add(:avatar, 'is missing you absolute wetwipe') unless avatar.attached?
   end
 end

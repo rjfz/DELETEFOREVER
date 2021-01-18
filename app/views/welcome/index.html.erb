@@ -1,7 +1,5 @@
-
 <h1>Hello, Rails!</h1>
 <%= link_to 'My Blog', controller: 'articles' %>
-
 <% if can? :read, Article %>Read the article!<% end %><br>
 <% if can? :update, Article %>Update the article!<% end %><br>
 <% if can? :create, Article %>Create the article!<% end %><br>
@@ -9,10 +7,3 @@
 <% if can? :update, Comment %>Update the comment!<% end %><br>
 <% if can? :frog, Article %>Frog the article!<% end %><br>
 <% if can? :create, Comment %>You can create comments<% end %><br>
-
-<% if current_user %>
-  <img src="<%= url_for current_user.avatar %>">
-  <img src="<%= url_for current_user.small %>">
-  <img src="<%= url_for current_user.medium %>">
-  <img src="<%= url_for current_user.large %>">
-<% end %>

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Ability
   include CanCan::Ability
 
@@ -6,7 +8,7 @@ class Ability
     #
     user ||= User.new # guest user (not logged in)
 
-    can :manage, :all if user.roles.find_by(role: 'admin')
+    can :manage, :all if admin? user
 
     can :read, :all
 
@@ -16,28 +18,19 @@ class Ability
       end
     end
 
+    setup_own_permissions(user)
+  end
+
+  private
+
+  def setup_own_permissions(user)
     can :update, Article, author_id: user.id
     can :update, Comment, commenter_id: user.id
     can :delete, Article, author_id: user.id
     can :delete, Comment, commenter_id: user.id
+  end
 
-    #
-    # The first argument to `can` is the action you are giving the user
-    # permission to do.
-    # If you pass :manage it will apply to every action. Other common actions
-    # here are :read, :create, :update and :destroy.
-    #
-    # The second argument is the resource the user can perform the action on.
-    # If you pass :all it will apply to every resource. Otherwise pass a Ruby
-    # class of the resource.
-    #
-    # The third argument is an optional hash of conditions to further filter the
-    # objects.
-    # For example, here the user can only update published articles.
-    #
-    #   can :update, Article, :published => true
-    #
-    # See the wiki for details:
-    # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
+  def admin?(user)
+    user.roles.find_by(role: 'admin')
   end
 end

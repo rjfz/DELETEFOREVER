@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :logged_in?
@@ -13,9 +15,13 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login
-    unless logged_in?
-      flash[:error] = 'You must be logged in to access this section'
-      redirect_to '/signin'
-    end
+    return if logged_in?
+
+    show_flash :error, 'You must be logged in to access this section'
+    redirect_to '/signin'
+  end
+
+  def show_flash(type, message)
+    flash[type] = message
   end
 end

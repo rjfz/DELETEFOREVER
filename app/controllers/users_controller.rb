@@ -8,9 +8,14 @@ class UsersController < ApplicationController
   def create
     @user = User.create(params.require(:user).permit(:username, :password, :avatar))
 
-    session[:user_id] = @user.id
-
-    redirect_to action: 'index', controller: 'welcome'
+    if @user.errors.any?
+      show_flash :warning, "You absolute fuckup - #{@user.errors.full_messages.join ', '}"
+      render :new
+    else
+      show_flash :info, 'love you longtime'
+      session[:user_id] = @user.id
+      redirect_to action: 'index', controller: 'welcome'
+    end
   end
 
   def signout
@@ -21,7 +26,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
+    if @user.update(params.require(:user).permit(:avatar, :username))
       flash[:success] = 'u was right'
     else
       flash[:error] = "bitch the fuck - #{@user.errors.full_messages.join ', '}"
@@ -29,7 +34,13 @@ class UsersController < ApplicationController
     redirect_to controller: 'options', action: 'index'
   end
 
-  def user_params
-    params.require(:user).permit(:avatar, :username, :password)
+  def update_password
+    @user = User.find(params[:id])
+    if @user.update(params.require(:user).permit(:password))
+      flash[:success] = 'u was right'
+    else
+      flash[:error] = "bitch the fuck - #{@user.errors.full_messages.join ', '}"
+    end
+    redirect_to controller: 'options', action: 'change_password'
   end
 end

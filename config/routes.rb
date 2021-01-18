@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   get 'welcome/index'
   get 'options', action: :index, controller: :options
+  get 'change_password', action: :change_password, controller: :options
+  patch 'update_password/:id', action: :update_password, controller: :users, as: :update_password
 
   resources :articles do
     resources :comments
