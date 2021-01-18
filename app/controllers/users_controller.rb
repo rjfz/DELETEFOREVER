@@ -18,4 +18,18 @@ class UsersController < ApplicationController
     flash[:info] = 'Logged out'
     redirect_to action: 'index', controller: 'welcome'
   end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      flash[:success] = 'u was right'
+    else
+      flash[:error] = "bitch the fuck - #{@user.errors.full_messages.join ', '}"
+    end
+    redirect_to controller: 'options', action: 'index'
+  end
+
+  def user_params
+    params.require(:user).permit(:avatar, :username, :password)
+  end
 end

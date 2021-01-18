@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   get 'welcome/index'
+  get 'options', action: :index, controller: :options
 
   resources :articles do
     resources :comments
   end
 
-  resources :users, only: %i[new create]
+  resources :users, only: %i[new create update]
 
   get 'signup', action: :new, controller: :users
   post 'signup', action: :create, controller: :users
@@ -18,5 +19,6 @@ Rails.application.routes.draw do
   resources :signup, only: %i[new create]
 
   root 'welcome#index'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :roles, through: :user_roles
   has_one_attached :avatar
 
+  validates :username, presence: true, uniqueness: true, length: { minimum: 3 }
+
   after_create :assign_default_role
 
   def small
@@ -23,6 +25,6 @@ class User < ApplicationRecord
   end
 
   def assign_default_role
-    roles << Role.find_by(role: "member")
+    roles << Role.find_by(role: 'member')
   end
 end
