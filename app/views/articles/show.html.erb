@@ -12,14 +12,14 @@
     </div>
   </div>
 </div>
-
 <h2>Comments</h2>
-<%= render @article.comments %>
-  <% if logged_in?%>
-<h2>Add a comment:</h2>
-<%= render 'comments/form' %>
- <% end %>
+<%= render @comments %>
+<%= will_paginate @comments, class: 'flickr_pagination' %>
+<% if logged_in?%>
+  <h2>Add a comment:</h2>
+  <%= render 'comments/form' %>
+<% end %>
 <% if can? :update, @article %>
-<%= link_to 'Edit', edit_article_path(@article) %> |
+  <%= link_to 'Edit', edit_article_path(@article) %> |
 <% end %>
 <%= link_to 'Back', articles_path %>

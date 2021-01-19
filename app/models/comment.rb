@@ -4,4 +4,5 @@ class Comment < ApplicationRecord
   belongs_to :article
   belongs_to :commenter, class_name: 'User'
   validates :body, presence: true, length: { minimum: 3 }
+  self.per_page = 4
 end
