@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
-    @comment_counter_offset = ((params[:page].to_i - 1) * Comment.per_page) + 1
+    @comment_counter_offset = (((params[:page] || 1).to_i - 1) * Comment.per_page) + 1
     @comments = @article.comments.paginate(page: params[:page])
   end
 
