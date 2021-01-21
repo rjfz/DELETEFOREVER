@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @user = User.create(params.require(:user).permit(:username, :password, :avatar, :password_confirmation))
 
     if @user.errors.any?
-      show_flash :warning, "You absolute fuckup - #{@user.errors.full_messages.join ', '}"
+      show_flash :warning, "You absolute fuckup - #{list_of_errors(@user)}"
       render :new
     else
       show_flash :info, 'love you longtime'
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     if @user.update(params.require(:user).permit(:avatar, :username))
       flash[:success] = 'u was right'
     else
-      flash[:error] = "bitch the fuck - #{@user.errors.full_messages.join ', '}"
+      flash[:error] = "bitch the fuck - #{list_of_errors(@user)}"
     end
     redirect_to controller: 'options', action: 'index'
   end

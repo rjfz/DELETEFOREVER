@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
   private
 
   def flash_errors
-    flash[:error] = @comment.errors.full_messages.join(', ') if @comment.errors.any?
+    flash[:error] = list_of_errors(@comment) if @comment.errors.any?
   end
 
   def comment_params
