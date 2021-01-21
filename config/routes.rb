@@ -22,6 +22,10 @@ Rails.application.routes.draw do
 
   resources :signup, only: %i[new create]
 
+  scope module: 'admin', path: 'admin', as: 'admin' do
+    resources :users
+  end
+
   root 'welcome#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?
   helper_method :require_login
   helper_method :author_permission
+  helper_method :admin?
 
   def current_user
     User.find_by(id: session[:user_id])
@@ -27,5 +28,9 @@ class ApplicationController < ActionController::Base
 
   def list_of_errors(model)
     model.errors.full_messages.join ', '
+  end
+
+  def admin?
+    current_user.roles.find_by(role: 'admin')
   end
 end

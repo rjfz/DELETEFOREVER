@@ -8,6 +8,11 @@
         <%= current_user.username %> the <%= current_user.roles.first&.role %></a>
     </b>
     <form class="form-inline">
+      <% if admin? %>
+        <a class="btn btn-outline-danger mr-2" href="/admin/users" role="button">
+          Admin
+        </a>
+      <% end %>
       <a class="btn btn-outline-danger" href="/signout" role="button">
         Logout
       </a>
