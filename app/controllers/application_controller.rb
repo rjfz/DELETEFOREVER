@@ -24,4 +24,8 @@ class ApplicationController < ActionController::Base
   def show_flash(type, message)
     flash[type] = message
   end
+
+  def list_of_errors(model)
+    model.errors.full_messages.join ', '
+  end
 end

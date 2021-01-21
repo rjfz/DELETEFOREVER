@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(params.require(:user).permit(:username, :password, :avatar))
+    @user = User.create(params.require(:user).permit(:username, :password, :avatar, :password_confirmation))
 
     if @user.errors.any?
       show_flash :warning, "You absolute fuckup - #{@user.errors.full_messages.join ', '}"
@@ -36,11 +36,21 @@ class UsersController < ApplicationController
 
   def update_password
     @user = User.find(params[:id])
-    if @user.update(params.require(:user).permit(:password))
-      flash[:success] = 'u was right'
+    if @user.authenticate(old_password)
+      if @user.update(params.require(:user).permit(:password, :password_confirmation))
+        flash[:success] = 'u was right'
+      else
+        flash[:error] = "bitch the fuck - #{list_of_errors(@user)}"
+      end
     else
-      flash[:error] = "bitch the fuck - #{@user.errors.full_messages.join ', '}"
+      flash[:error] = 'ur shit'
     end
     redirect_to controller: 'options', action: 'change_password'
+  end
+
+  private
+
+  def old_password
+    params.require(:user).permit(:old_password)[:old_password]
   end
 end

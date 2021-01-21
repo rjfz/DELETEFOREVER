@@ -10,6 +10,9 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true, length: { minimum: 3 }
   validates :password, presence: true, length: { minimum: 5 }, if: :password
+  validates :password, confirmation: true
+  validates :password_confirmation, presence: true, if: :password_digest_changed?
+  
 
   validate :avatar_attached?
 
