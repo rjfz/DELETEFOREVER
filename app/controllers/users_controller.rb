@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     if @user.update(params.require(:user).permit(:avatar, :username))
       flash[:success] = 'u was right'
     else
-      flash[:error] = "bitch the fuck - #{list_of_errors(@user)}"
+      flash[:error] = "bitch the fuck - #{@user.errors.full_messages.join ', '}"
     end
     redirect_to controller: 'options', action: 'index'
   end
@@ -37,11 +37,7 @@ class UsersController < ApplicationController
   def update_password
     @user = User.find(params[:id])
     if @user.authenticate(old_password)
-      if @user.update(params.require(:user).permit(:password, :password_confirmation))
-        flash[:success] = 'u was right'
-      else
-        flash[:error] = "bitch the fuck - #{list_of_errors(@user)}"
-      end
+      new_password_confirmation
     else
       flash[:error] = 'ur shit'
     end
@@ -52,5 +48,17 @@ class UsersController < ApplicationController
 
   def old_password
     params.require(:user).permit(:old_password)[:old_password]
+  end
+
+  def confirm_password
+    params.require(:user).permit(:password, :password_confirmation)
+  end
+
+  def new_password_confirmation
+    if @user.update(confirm_password)
+      flash[:success] = 'u was right'
+    else
+      flash[:error] = "bitch the fuck - #{list_of_errors(@user)}"
+    end
   end
 end

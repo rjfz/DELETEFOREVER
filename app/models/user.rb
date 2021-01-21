@@ -12,8 +12,6 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 5 }, if: :password
   validates :password, confirmation: true
   validates :password_confirmation, presence: true, if: :password_digest_changed?
-  
-
   validate :avatar_attached?
 
   after_create :assign_default_role
