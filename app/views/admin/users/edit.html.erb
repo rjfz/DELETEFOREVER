@@ -1,0 +1,10 @@
+<%= form_for @user do |f|%>
+  <%= f.label :username%><br>
+  <%= f.text_field :username, class:'mb-3'%><br>
+  <%= f.label "Change users avatar:"%><br>
+  <%= f.file_field :avatar, class:'pb-3'%><br>
+  <%= f.submit class: 'mb-3' %>
+<% end %>
+<% unless @user.ban_time %>
+  <%= link_to 'Ban bottoin', admin_ban_time_path(@user.id), method: :post, class:"btn btn-outline-danger mr-2" %>
+<% end %>

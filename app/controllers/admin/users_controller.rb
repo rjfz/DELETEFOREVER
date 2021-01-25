@@ -10,6 +10,10 @@ module Admin
       @user = User.new
     end
 
+    def edit
+      @user = User.find(params[:id])
+    end
+
     def create
       @user = User.create(params.require(:user).permit(:username, :password, :avatar, :password_confirmation))
 
@@ -31,6 +35,12 @@ module Admin
         flash[:error] = "bitch the fuck - #{@user.errors.full_messages.join ', '}"
       end
       redirect_to controller: 'options', action: 'index'
+    end
+
+    def ban_time
+      user = User.find(params[:id])
+      user.ban_time = Time.now
+      user.save
     end
   end
 end
