@@ -51,6 +51,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'bootstrap', '~>4'
 gem 'bootstrap_form'
+gem 'breadcrumbs'
 gem 'cancancan', '~> 1.10'
 gem 'jquery-rails'
 gem 'will_paginate', '~> 3.1.0'

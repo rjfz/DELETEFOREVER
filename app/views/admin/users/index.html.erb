@@ -15,7 +15,7 @@
         <tbody>
           <% @users.each do |user| %>
             <tr>
-              <td><%= user.username %></td>
+              <td><%= user.ban_time ? '<del>'.html_safe : '' %><%= user.username %><%= user.ban_time ? '</del>'.html_safe : '' %></td>
               <td><%= user.role %></td>
               <td class="text-right"><a href=" <%= edit_admin_user_path(user) %>" class="btn btn-primary"> Edit </a></td>
             </tr>

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  before_action :add_initial_breadcrumbs
   helper_method :current_user
   helper_method :logged_in?
   helper_method :require_login
@@ -32,5 +33,11 @@ class ApplicationController < ActionController::Base
 
   def admin?
     current_user.roles.find_by(role: 'admin')
+  end
+
+  private
+
+  def add_initial_breadcrumbs
+    breadcrumbs.add 'Welcome', root_path
   end
 end

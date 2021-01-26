@@ -4,6 +4,7 @@ module Admin
   class UsersController < AdminController
     def index
       @users = User.all
+      breadcrumbs.add 'manage users'
     end
 
     def new
@@ -12,6 +13,7 @@ module Admin
 
     def edit
       @user = User.find(params[:id])
+      breadcrumbs.add @user.username
     end
 
     def create
@@ -34,7 +36,7 @@ module Admin
       else
         flash[:error] = "bitch the fuck - #{@user.errors.full_messages.join ', '}"
       end
-      redirect_to controller: 'options', action: 'index'
+      redirect_to edit_admin_user_path(@user)
     end
 
     def ban_time

@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title><%= @page_title %></title>
-  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <%= csrf_meta_tag %>
-
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <title><%= @page_title %></title>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tag %>
+  </head>
   <body>
     <%= render 'layouts/navbar' %>
     <div class='container-fluid'>
-
-    <%= render 'layouts/alert', type: :info, style: :info %>
-    <%= render 'layouts/alert', type: :success, style: :success %>
-    <%= render 'layouts/alert', type: :warning, style: :warning %>
-    <%= render 'layouts/alert', type: :error, style: :danger %>
-
-    <%= yield %>
-
+      <div class="row">
+        <div class="col">
+          <%= breadcrumbs.render(format: :inline, separator: "->") %>
+        </div>
+      </div>
+      <%= render 'layouts/alert', type: :info, style: :info %>
+      <%= render 'layouts/alert', type: :success, style: :success %>
+      <%= render 'layouts/alert', type: :warning, style: :warning %>
+      <%= render 'layouts/alert', type: :error, style: :danger %>
+      <%= yield %>
+    </div>
   </body>
 </html>

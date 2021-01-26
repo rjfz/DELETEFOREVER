@@ -1,25 +1,31 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
+  before_action :add_article_breadcrumbs
   before_action :require_login, except: %i[index show]
 
   def index
     @articles = Article.all
+    breadcrumbs.add 'Article Listing'
   end
 
   def show
     @article = Article.find(params[:id])
     @comment_counter_offset = (((params[:page] || 1).to_i - 1) * Comment.per_page) + 1
     @comments = @article.comments.paginate(page: params[:page])
+    breadcrumbs.add @article.title
   end
 
   def new
     @article = Article.new
+    breadcrumbs.add 'New Article'
   end
 
   def edit
     @article = Article.find(params[:id])
     author_permission
+    breadcrumbs.add @article.title, article_path(@article)
+    breadcrumbs.add 'edit'
   end
 
   def create
@@ -60,5 +66,9 @@ class ArticlesController < ApplicationController
 
     flash[:warning] = 'You are not the author of this article'
     redirect_to '/articles'
+  end
+
+  def add_article_breadcrumbs
+    breadcrumbs.add 'Articles', articles_path
   end
 end
