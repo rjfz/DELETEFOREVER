@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   scope module: 'admin', path: 'admin', as: 'admin' do
     resources :users
     post '/users/ban/:id', action: :ban_time, controller: :users, as: :ban_time
+    post '/users/unban/:id', action: :unban_user, controller: :users, as: :unban_user
   end
 
   root 'welcome#index'

@@ -5,6 +5,8 @@
   <%= f.file_field :avatar, class:'pb-3'%><br>
   <%= f.submit class: 'mb-3' %>
 <% end %>
-<% unless @user.ban_time %>
+<% if @user.ban_time %>
+  <%= link_to 'Unban User', admin_unban_user_path(@user.id), method: :post, class:"btn btn-outline-success mr-2" %>
+<% else %>
   <%= link_to 'Ban bottoin', admin_ban_time_path(@user.id), method: :post, class:"btn btn-outline-danger mr-2" %>
 <% end %>

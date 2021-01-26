@@ -41,6 +41,14 @@ module Admin
       user = User.find(params[:id])
       user.ban_time = Time.now
       user.save
+      redirect_to edit_admin_user_path(user)
+    end
+
+    def unban_user
+      user = User.find(params[:id])
+      user.ban_time = nil
+      user.save
+      redirect_to edit_admin_user_path(user)
     end
   end
 end
