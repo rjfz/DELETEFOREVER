@@ -10,7 +10,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find(params[:id])
+    find_article_id
     @comment_counter_offset = (((params[:page] || 1).to_i - 1) * Comment.per_page) + 1
     @comments = @article.comments.paginate(page: params[:page])
     breadcrumbs.add @article.title
@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
+    find_article_id
     author_permission
     breadcrumbs.add @article.title, article_path(@article)
     breadcrumbs.add 'Edit'
@@ -56,6 +56,10 @@ class ArticlesController < ApplicationController
   end
 
   private
+
+  def find_article_id
+    @article = Article.find(params[:id])
+  end
 
   def article_params
     params.require(:article).permit(:title, :text)
