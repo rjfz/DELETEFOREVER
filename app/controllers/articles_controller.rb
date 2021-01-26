@@ -25,7 +25,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     author_permission
     breadcrumbs.add @article.title, article_path(@article)
-    breadcrumbs.add 'edit'
+    breadcrumbs.add 'Edit'
   end
 
   def create
