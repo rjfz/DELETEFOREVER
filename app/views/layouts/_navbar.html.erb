@@ -5,7 +5,7 @@
   <% if logged_in?%>
     <b>
       <a class="navbar-text">Welcome back
-        <%= current_user.username %> the <%= current_user.roles.first&.role %></a>
+        <%= current_user.username %> the <%= current_user.role%></a>
     </b>
     <form class="form-inline">
       <% if admin? %>

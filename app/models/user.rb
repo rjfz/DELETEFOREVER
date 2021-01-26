@@ -32,6 +32,10 @@ class User < ApplicationRecord
     roles << Role.find_by(role: 'member')
   end
 
+  def role
+    roles.first.role
+  end
+
   private
 
   def avatar_attached?
