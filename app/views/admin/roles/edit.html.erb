@@ -2,5 +2,12 @@
   <%= f.label :role%><br>
   <%= f.text_field :role, class:'mb-3'%><br>
   <%= f.submit class: 'mb-3' %><br>
-  <%= link_to('Destroy', admin_role_path(@role),  method: :delete, data: { confirm: 'Are you sure?' }, class:  "btn btn-primary") %>
 <% end %>
+<% @permissions.each do |resource, permissions| %>
+  <%= resource  %>
+  <% permissions.each do |permission| %>
+    <%= bootstrap_form_tag do |f|%>  <%= f.check_box permission.command %>
+    <% end %>
+  <% end %><hr>
+<% end %>
+<%= link_to('Destroy', admin_role_path(@role),  method: :delete, data: { confirm: 'Are you sure?' }, class:  "btn btn-primary") %>
