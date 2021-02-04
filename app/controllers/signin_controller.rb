@@ -8,7 +8,7 @@ class SigninController < ApplicationController
   end
 
   def banned?
-    @user.ban_time
+    @user&.ban_time
   end
 
   def authenticated?
