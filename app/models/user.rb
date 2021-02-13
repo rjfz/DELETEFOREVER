@@ -29,7 +29,7 @@ class User < ApplicationRecord
   end
 
   def assign_default_role
-    roles << Role.find_by(role: 'member')
+    roles << Role.find_by(role: 'User')
   end
 
   def role

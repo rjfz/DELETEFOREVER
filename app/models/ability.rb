@@ -13,8 +13,10 @@ class Ability
     can :read, :all
 
     user.roles.each do |role|
-      role.permissions.each do |permission|
-        can permission.command.to_sym, permission.resource.constantize
+      role.role_permissions.each do |role_permission|
+        if role_permission.enabled?
+          can role_permission.permission.command.to_sym, role_permission.permission.resource.camelcase.constantize
+        end
       end
     end
 

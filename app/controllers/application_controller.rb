@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
   end
 
   def admin?
-    current_user.roles.find_by(role: 'admin')
+    current_user.roles.find_by(role: 'Admin')
   end
 
   private
