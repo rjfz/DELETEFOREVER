@@ -5,7 +5,6 @@
 
 import '../stylesheets/application'
 require("@rails/ujs").start()
-require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 import 'bootstrap'
@@ -17,3 +16,6 @@ import 'bootstrap'
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+import "controllers"
+import "@hotwired/turbo-rails"

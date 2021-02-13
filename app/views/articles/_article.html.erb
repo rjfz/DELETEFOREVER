@@ -1,0 +1,14 @@
+<div class= "col-md-3 pb-4">
+  <div class="card">
+    <img class="card-img-top" src="" alt="" style="width:100%">
+    <div class="card-body">
+      <h5 class="card-title"><%= article.title %></h5>
+      <p class="card-text">by <%= article.author.username %></p>
+      <div class="row">
+        <div class="col"><%= link_to 'Show', article_path(article), class:  "btn btn-primary d-block" %> </div>
+        <div class="col"><%= link_to('Edit', edit_article_path(article), class:  "btn btn-primary d-block") if can? :update, article %> </div>
+        <div class="col"><%= link_to('Destroy', article_path(article),  method: :delete, data: { confirm: 'Are you sure?' }, class:  "btn btn-primary d-block") if can? :delete, article %> </div>
+      </div>
+    </div>
+  </div>
+</div>
