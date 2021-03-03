@@ -11,10 +11,13 @@ module Admin
       @role = Role.new
     end
 
+    def show
+      @role = Role.find(params[:id])
+    end
+
     def edit
       @role = Role.find(params[:id])
       @permissions = Permission.all.group_by(&:resource)
-      pp @permissions
       breadcrumbs.add @role.role
     end
 

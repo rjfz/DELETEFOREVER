@@ -5,22 +5,15 @@
 </div>
 <div class="row">
   <div class="col">
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <th>Role</th>
-          <th class="text-right">Edit User</th>
-        </thead>
-        <tbody>
-          <% @roles.each do |role| %>
-            <tr>
-              <td><%= role.role %></td>
-              <td class="text-right"><a href=" <%= edit_admin_role_path(role) %>" class="btn btn-primary"> Edit </a></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <td class="text-right"><a href=" <%= new_admin_role_path %>" class="btn btn-primary"> Add Role xo </a></td>
+    <td class="text-right"><a href=" <%= new_admin_role_path %>" class="btn btn-primary"> Add Role xo </a></td>
+    <div class="d-flex flex-column">
+      <div class="d-flex justify-content-between flex-row">
+        <h4>Role</h4>
+        <h4>Edit User</h4>
+      </div>
+      <%= turbo_stream_from "roles" %>
+      <%= turbo_frame_tag "roles" do%>
+        <%= render partial: "roles/role", collection: @roles, as: :role %>
+      <% end %>
     </div>
   </div>
-</div>

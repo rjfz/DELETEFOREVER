@@ -1,0 +1,6 @@
+<%= turbo_frame_tag dom_id(role) do %>
+  <div class="d-flex justify-content-between flex-row py-2 border-top">
+    <p><%= role.role %></p>
+    <a href=" <%= edit_admin_role_path(role) %>" class="btn btn-primary"> Edit </a>
+  </div>
+<% end %>
